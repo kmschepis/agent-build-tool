@@ -133,6 +133,24 @@ Minimalized example payload:
 }
 ```
 
+## Examples
+
+A ready-to-run sample project lives in `examples/basic`. You can compile it directly:
+
+```bash
+cd examples/basic
+python -m abt compile --output abt_manifest.json
+```
+
+## Testing
+
+Install dependencies and run the unit tests with the standard library test runner:
+
+```bash
+pip install -e .
+python -m unittest discover -s tests
+```
+
 ## Interaction Patterns
 
 ### The Developer (CLI)
