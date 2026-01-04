@@ -1,0 +1,19 @@
+[project]
+name = "agent-build-tool"
+version = "0.1.0"
+description = "Agent Build Tool (ABT)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ABT Contributors" }]
+dependencies = [
+  "Jinja2>=3.1",
+  "PyYAML>=6.0",
+]
+
+[project.scripts]
+abt = "abt.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
