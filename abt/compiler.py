@@ -102,6 +102,7 @@ def compile_project(root: Path) -> dict[str, Any]:
         )
         manifest["agents"][name] = {
             "model_provider": metadata.get("model_provider"),
+            "model": metadata.get("model"),
             "temperature": metadata.get("temperature"),
             "system_prompt": artifact.system_prompt,
             "dependencies": artifact.dependencies,
