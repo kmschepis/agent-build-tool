@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .compiler import CompilationError, compile_project
 from .docs import generate_docs
+from .runtime import run_server
 from .scaffold import scaffold_project
 from .utils import write_json
 
@@ -28,6 +29,19 @@ def main(argv: list[str] | None = None) -> int:
         "--output",
         default=None,
         help="Output directory (defaults to abt_docs)",
+    )
+
+    run_parser = subparsers.add_parser("run", help="Run local chat runtime")
+    run_parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Host interface for the local server",
+    )
+    run_parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="Port for the local server",
     )
 
     args = parser.parse_args(argv)
@@ -61,6 +75,14 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Docs generation failed: {exc}")
             return 1
         print(f"Generated docs at {html_path}")
+        return 0
+
+    if args.command == "run":
+        try:
+            run_server(root, host=args.host, port=args.port)
+        except CompilationError as exc:
+            print(f"Runtime startup failed: {exc}")
+            return 1
         return 0
 
     parser.print_help()
